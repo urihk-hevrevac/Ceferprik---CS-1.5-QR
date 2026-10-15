@@ -8,16 +8,35 @@
   body{
     font-family: Arial, Helvetica, sans-serif;
     font-size:16px;
-    line-height:1.7;
+    line-height:1.6;
     max-width:650px;
     margin:30px auto;
     padding:0 16px;
     color:#000;
   }
-  ul{list-style:disc; padding-left:22px; margin:0 0 18px;}
-  li{margin-bottom:8px;}
+  table{
+    width:100%;
+    border-collapse:collapse;
+  }
+  td{
+    padding:10px 6px;
+    vertical-align:top;
+    border-bottom:1px solid #ddd;
+  }
+  td.label{
+    width:40%;
+    font-weight:bold;
+  }
+  td.sep{
+    width:14px;
+    font-weight:bold;
+    text-align:center;
+  }
   select{font-size:16px; padding:6px 8px; max-width:100%; margin-bottom:18px;}
   #picker{display:none;}
+  @media (max-width:480px){
+    td.label{width:42%;}
+  }
 </style>
 </head>
 <body>
@@ -27,31 +46,58 @@
   <select id="batchSelect"></select>
 </div>
 
-<ul>
-  <li>Brand Name: Ceferprik-CS 1.5</li>
-  <li>Proper and Generic Name: Cefpirome &amp; Sulbactam for Injection 1.5 gm
-    <ul style="margin-top:8px;">
-      <li>Composition: Each vial contains:</li>
-      <li>Cefpirome Sulphate (Sterile) IP, Eq. to Anhydrous Cefpirome: 1000 mg</li>
-      <li>Sulbactam Sodium (Sterile) IP, Eq. to Anhydrous Sulbactam: 500 mg</li>
-    </ul>
-  </li>
-  <li>Manufactured by: Protech Telelinks (A WHO-GMP Certified Co.), Mauza Ogli, Suketi Road, Kala Amb, District Sirmour (H.P.) 173030</li>
-  <li>Mfg. Lic. No.: N-MB/16/185</li>
-  <li>Batch No.: <span id="batch"></span></li>
-  <li>Mfg. Date: <span id="mfg"></span></li>
-  <li>Expiry Date: <span id="exp"></span></li>
-  <li>Marketed by: Urihk Pharmaceutical Pvt. Ltd., 602-603, Sai Samarth Business Park, Near Wasan Motors, Deonar Village Road, Deonar, Govandi (E), Mumbai-400088</li>
-</ul>
+<table>
+  <tr>
+    <td class="label">Serial Number</td>
+    <td class="sep">:</td>
+    <td id="serial"></td>
+  </tr>
+  <tr>
+    <td class="label">Generic Name</td>
+    <td class="sep">:</td>
+    <td>Cefpirome &amp; Sulbactam for Injection 1.5 gm</td>
+  </tr>
+  <tr>
+    <td class="label">Brand Name</td>
+    <td class="sep">:</td>
+    <td>Ceferprik-CS 1.5</td>
+  </tr>
+  <tr>
+    <td class="label">Name and address of the manufacturer</td>
+    <td class="sep">:</td>
+    <td>Protech Telelinks (A WHO-GMP Certified Co.),<br>Mauza Ogli, Suketi Road, Kala Amb,<br>District Sirmour (H.P.) 173030</td>
+  </tr>
+  <tr>
+    <td class="label">Batch Number</td>
+    <td class="sep">:</td>
+    <td id="batch"></td>
+  </tr>
+  <tr>
+    <td class="label">Date of Manufacturing</td>
+    <td class="sep">:</td>
+    <td id="mfg"></td>
+  </tr>
+  <tr>
+    <td class="label">Date of Expiry</td>
+    <td class="sep">:</td>
+    <td id="exp"></td>
+  </tr>
+  <tr>
+    <td class="label">Manufacturing Licence Number</td>
+    <td class="sep">:</td>
+    <td>N-MB/16/185</td>
+  </tr>
+</table>
 
 <script>
 /* ===== BATCH LIST — add one line per new batch, keep old ones ===== */
 var BATCHES = [
-  { batch: "D0442506A", mfg: "07/2025", exp: "06/2027" }
+  { serial: "G2KTDMHK5", batch: "D0442506A", mfg: "07/2025", exp: "06/2027" }
 ];
 /* ================================================================= */
 
 function show(b){
+  document.getElementById('serial').textContent = b.serial;
   document.getElementById('batch').textContent = b.batch;
   document.getElementById('mfg').textContent = b.mfg;
   document.getElementById('exp').textContent = b.exp;
