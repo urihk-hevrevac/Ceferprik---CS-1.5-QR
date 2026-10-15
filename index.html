@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Information</title>
+<style>
+  body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:16px;
+    line-height:1.7;
+    max-width:650px;
+    margin:30px auto;
+    padding:0 16px;
+    color:#000;
+  }
+  ul{list-style:disc; padding-left:22px; margin:0 0 18px;}
+  li{margin-bottom:8px;}
+  select{font-size:16px; padding:6px 8px; max-width:100%; margin-bottom:18px;}
+  #picker{display:none;}
+</style>
+</head>
+<body>
+
+<div id="picker">
+  <label for="batchSelect"><strong>Select the batch number printed on your pack:</strong></label><br>
+  <select id="batchSelect"></select>
+</div>
+
+<ul>
+  <li>Mfg. Lic. No.: N-MB/16/185</li>
+  <li>Batch No.: <span id="batch"></span></li>
+  <li>Mfg. Date: <span id="mfg"></span></li>
+  <li>Expiry Date: <span id="exp"></span></li>
+  <li>Marketed by: Urihk Pharmaceutical Pvt. Ltd., 602-603, Sai Samarth Business Park, Near Wasan Motors, Deonar Village Road, Deonar, Govandi (E), Mumbai-400088</li>
+</ul>
+
+<script>
+/* ===== BATCH LIST — add one line per new batch, keep old ones ===== */
+var BATCHES = [
+  { batch: "D0442506A", mfg: "07/2025", exp: "06/2027" }
+];
+/* ================================================================= */
+
+function show(b){
+  document.getElementById('batch').textContent = b.batch;
+  document.getElementById('mfg').textContent = b.mfg;
+  document.getElementById('exp').textContent = b.exp;
+}
+show(BATCHES[BATCHES.length - 1]);
+if (BATCHES.length > 1){
+  var sel = document.getElementById('batchSelect');
+  BATCHES.forEach(function(b, i){
+    var o = document.createElement('option');
+    o.value = i; o.textContent = b.batch; sel.appendChild(o);
+  });
+  sel.value = BATCHES.length - 1;
+  sel.onchange = function(){ show(BATCHES[sel.value]); };
+  document.getElementById('picker').style.display = 'block';
+}
+</script>
+</body>
+</html>
